@@ -4,7 +4,19 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
-  // your code here
-};
+function getElementsByClassName(className) {
+  var elements = [];
+
+  function getElementAt(node) {
+    if (node.classList && node.classList.contains(className)) {
+      elements.push(node);
+    }
+    
+    for (var i = 0; i<node.childNodes.length; i++) {
+    	getElementAt(node.childNodes[i]);
+    }
+  }
+
+  getElementAt(document.body);
+  return elements;
+}
